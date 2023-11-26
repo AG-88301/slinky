@@ -1,5 +1,4 @@
 from vpython import *
-from dotenv import dotenv_values
 
 from slinky import Slinky
 
@@ -26,5 +25,14 @@ slinky.update()
 
 print(slinky.balls[0].pos - slinky.balls[-1].pos)
 
-while True:
+t = 0
+dt = 0.001
+
+while t < 10:
     rate(100)
+
+    for i in range(len(slinky.balls)):
+        slinky.balls[i].pos = vector(0, slinky.balls[i].pos.y, 0)
+    slinky.update()
+
+    t += dt
