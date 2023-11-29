@@ -28,3 +28,6 @@ class Slinky:
         for i in range(len(self.balls)-1):
             self.coils[i].pos = self.balls[i].pos
             self.coils[i].axis = self.balls[i + 1].pos - self.balls[i].pos
+
+    def height(self):
+        return abs(self.balls[0].pos.y - self.balls[-1].pos.y)
