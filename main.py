@@ -19,6 +19,7 @@ L0 = 0.051
 L = lambda x: ((x/m)*g)/(2*k) # length of slinky extended under gravity
 f = lambda x: L(x - 1)**2 # {0 <= x <= 1}
 dragA = lambda V, diameter, rad: (cd * ((r * V**2)/2) * ((2 * pi * rad) * pi * diameter/2))/m
+# tensionA = lambda x, t, m: m * g + m * accel - 
 
 slinky = Slinky(radius=0.05, thickness=(L0/66)*10, turns=66)
 
@@ -33,6 +34,8 @@ dt = 0.001
 
 moving = 1
 vel = 0
+accel = 0
+
 f1 = gcurve(color=color.cyan)
 f2 = gcurve(color=color.purple)
 f3 = gcurve(color=color.green)
@@ -44,7 +47,8 @@ while t < 0.5:
 while t < 10:
     rate(1000)
 
-    vel += (g - dragA(vel, slinky.thickness, slinky.radius)) * dt
+    accel = g - dragA(vel, slinky.thickness, slinky.radius)
+    vel += accel * dt
     for i in range(moving):
         slinky.balls[i].pos.y -= vel * dt
     slinky.update()
