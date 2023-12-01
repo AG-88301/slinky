@@ -1,7 +1,7 @@
 from vpython import *
 
 class Slinky:
-    def __init__(self, radius, thickness, turns):
+    def __init__(self, radius: float, thickness: float, turns: int) -> None:
         self.BALLR = 0.01
         self.DIST = 0.05
 
@@ -14,7 +14,7 @@ class Slinky:
 
         self.create()
 
-    def create(self):
+    def create(self) -> None:
         for i in range(self.turns):
             ball = sphere(pos = vector(0, -(self.DIST * (i + 1)), 0), radius = self.BALLR)
 
@@ -24,10 +24,10 @@ class Slinky:
             self.balls.append(ball)
             self.coils.append(coil)
 
-    def update(self):
+    def update(self) -> None:
         for i in range(len(self.balls)-1):
             self.coils[i].pos = self.balls[i].pos
             self.coils[i].axis = self.balls[i + 1].pos - self.balls[i].pos
 
-    def height(self):
+    def height(self) -> float:
         return abs(self.balls[0].pos.y - self.balls[-1].pos.y)
