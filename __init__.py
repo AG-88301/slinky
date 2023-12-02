@@ -14,7 +14,7 @@ r = 1.293                               # Density of air
 L = lambda x: ((x/m)*g)/(2*k)                                                                   # Helper function to f(x)
 f = lambda x: L(x - 1)**2                                                                       # Returns length of hanging slinky
 dragA = lambda V, diameter, rad: (cd * ((r * V**2)/2) * ((2 * pi * rad) * pi * diameter/2))/m   # Returns acceleration due to drag on slinky
-tensionA = lambda x, m, a: m * g + m * a - k * x
+tensionA = lambda x, m, a: m * g + m * a - k * x                                                # Returns (upwards) acceleration due to tension on slinky
 
 # Environoment Constants
 t = 0                                   # Time elapsed
