@@ -26,7 +26,7 @@ while t < 0.5:
 while t < 10:
     rate(1000)
 
-    accel = g - dragA(vel, slinky.thickness, slinky.radius)
+    accel = g - dragA(vel, slinky.thickness, slinky.radius) - tensionA((slinky.turns - moving - 1)/slinky.turns, (moving + 1) * (m/slinky.turns), accel)
     vel += accel * dt
     for i in range(moving):
         slinky.balls[i].pos.y -= vel * dt
