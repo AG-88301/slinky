@@ -17,6 +17,8 @@ dragA = lambda V, diameter, rad: (cd * ((r * V**2)/2) * ((2 * pi * rad) * pi * d
 tensionA = lambda x, m, a: m * g + m * a - k * x                                                # Returns (upwards) acceleration due to tension on slinky
 
 # Environoment Constants
+floorY = -1.3                           # Y position of floors
+
 t = 0                                   # Time elapsed
 dt = 0.001                              # Delta Time
 

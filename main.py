@@ -12,6 +12,7 @@ f2 = gcurve(color=color.purple)
 f3 = gcurve(color=color.green)
 
 slinky = Slinky(radius=0.05, thickness=(L0/66)*10, turns=66)
+floor = box(pos=vector(0, floorY, 0), size=vector(1, 0.1, 1))
 
 for i in range(slinky.turns + 1):
     slinky.balls[i].pos = vector(0, f((1/slinky.turns) * i), 0)
@@ -52,10 +53,11 @@ print(slinky.height())
 while True:
     rate(1000)
 
-    vel += (g - dragA(vel, slinky.thickness, slinky.radius)) * dt
-    for i in range(slinky.turns + 1):
-        slinky.balls[i].pos.y -= vel * dt
-    slinky.update()
+    if abs(slinky.balls[-1].pos.mag - floor.pos.mag) > 0.05:
+        vel += (g - dragA(vel, slinky.thickness, slinky.radius)) * dt
+        for i in range(slinky.turns + 1):
+            slinky.balls[i].pos.y -= vel * dt
+        slinky.update()
 
     f3.plot(t, vel)
 
