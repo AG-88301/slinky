@@ -1,4 +1,5 @@
 from vpython import *
+from time import sleep
 
 from __init__ import *
 from slinky import Slinky
@@ -10,24 +11,24 @@ scene.height = 700
 f1 = gcurve(color=color.cyan)
 f2 = gcurve(color=color.purple)
 f3 = gcurve(color=color.green)
+f4 = gcurve(color=color.purple)
+f5 = gcurve(color=color.green)
 
-slinky = Slinky(radius=0.05, thickness=(L0/66)*10, turns=66)
+slinky = Slinky(radius=0.05, thickness=(L1/66)*10, turns=66)
 floor = box(pos=vector(0, floorY, 0), size=vector(1, 0.1, 1))
 
 for i in range(slinky.turns + 1):
-    slinky.balls[i].pos = vector(0, f((1/slinky.turns) * i), 0)
+    slinky.balls[i].pos = vector(0, -f((1/slinky.turns) * i), 0)
 slinky.update()
 
 print(slinky.balls[0].pos - slinky.balls[-1].pos)
 
-while t < 0.5:
-    rate(100)
-    t += dt
+sleep(3)
 
 while t < 10:
     rate(1000)
 
-    accel = g - dragA(vel, slinky.thickness, slinky.radius) - tensionA((slinky.turns - moving - 1)/slinky.turns, (moving + 1) * (m/slinky.turns), accel)
+    accel = g - tensionA((slinky.turns - moving - 1)/slinky.turns, (moving + 1) * (m/slinky.turns), accel)
     vel += accel * dt
     for i in range(moving):
         slinky.balls[i].pos.y -= vel * dt
@@ -36,15 +37,17 @@ while t < 10:
     if moving > slinky.turns:
         break
     
-    if (slinky.balls[moving-1].pos.y - slinky.balls[moving].pos.y) <= (L0/(slinky.turns)):
-        slinky.balls[moving].pos.y = slinky.balls[moving-1].pos.y - L0/slinky.turns
+    if (slinky.balls[moving-1].pos.y - slinky.balls[moving].pos.y) <= (L1/(slinky.turns)):
+        slinky.balls[moving].pos.y = slinky.balls[moving-1].pos.y - L1/slinky.turns
         
         moving += 1
         vel = (vel * moving * (m/slinky.turns)) / ((moving + 1) * (m/slinky.turns))
 
     f1.plot(t, slinky.balls[0].pos.y)
-    f2.plot(t, slinky.balls[-1].pos.y)
-    f3.plot(t, vel)
+    f2.plot(t, slinky.balls[15].pos.y)
+    f3.plot(t, slinky.balls[32].pos.y)
+    f4.plot(t, slinky.balls[47].pos.y)
+    f5.plot(t, slinky.balls[-1].pos.y)
 
     t += dt
 
@@ -58,7 +61,12 @@ while True:
         for i in range(slinky.turns + 1):
             slinky.balls[i].pos.y -= vel * dt
         slinky.update()
-
-    f3.plot(t, vel)
+    else: break
+        
+    f1.plot(t, slinky.balls[0].pos.y)
+    f2.plot(t, slinky.balls[15].pos.y)
+    f3.plot(t, slinky.balls[32].pos.y)
+    f4.plot(t, slinky.balls[47].pos.y)
+    f5.plot(t, slinky.balls[-1].pos.y)
 
     t += dt
