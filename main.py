@@ -38,7 +38,7 @@ while t < 10:
         break
 
     # Force and Velocity applying on (moving section) of slinky
-    F = g * (((slinky.turns - moving)/slinky.turns) * m) - (5 * (m*moving/slinky.turns) * g/24)
+    F = g * (((slinky.turns - moving)/slinky.turns) * m) - (-m*g/2*(2*(moving/slinky.turns)-(moving/slinky.turns)**2))
     vel += (F/((moving/slinky.turns) * m)) * dt
     
     # update position
