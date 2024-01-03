@@ -14,11 +14,10 @@ f2 = gcurve(color=color.purple)
 f3 = gcurve(color=color.green)
 f4 = gcurve(color=color.blue)
 f5 = gcurve(color=color.black)
-f6 = gcurve(color=color.red)
 
 slinky = Slinky(radius=0.05, thickness=(L1/66)*10, turns=66)
 floor = box(pos=vector(0, floorY, 0), size=vector(1, 0.1, 1))
-scene.camera.follow(slinky.balls[32])
+scene.camera.follow(slinky.balls[32]) 
 
 for i in range(slinky.turns + 1):
     slinky.balls[i].pos = vector(0, -f((1/slinky.turns) * i), 0)
@@ -35,8 +34,8 @@ h = [abs(slinky.balls[i].pos.y - slinky.balls[i+1].pos.y) for i in range(len(sli
     
 while t < 10:
     rate(1000)
-    
     prev_vel = vel
+    #dy = h[moving-1]
     
     if moving > slinky.turns:
         break
@@ -46,7 +45,7 @@ while t < 10:
     integral = quad(lmdf, 0, abs(slinky.balls[-1].pos.y - slinky.balls[moving - 1].pos.y))[0]
 
     F = g * (((slinky.turns - moving)/slinky.turns) * m) - (5 * (m*moving/slinky.turns) * g/24) - integral
-    vel += (F/((moving/slinky.turns) * m)) * dt
+    vel += (F/m) * dt
     
     for i in range(moving):
         slinky.balls[i].pos.y -= vel * dt

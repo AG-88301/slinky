@@ -22,4 +22,4 @@ t = 0                                   # Time elapsed
 dt = 0.001                              # Delta Time
 
 moving = 1                              # Number of coils moving
-vel = 0                                 # Velocity of slinky
+vel = 26                                 # Velocity of slinky
