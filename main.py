@@ -28,7 +28,7 @@ sleep(3)
 while t < 10:
     rate(1000)
 
-    accel = g - tensionA((slinky.turns - moving - 1)/slinky.turns, (moving + 1) * (m/slinky.turns), accel)
+    accel = g
     vel += accel * dt
     for i in range(moving):
         slinky.balls[i].pos.y -= vel * dt
