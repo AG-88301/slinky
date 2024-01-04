@@ -1,6 +1,5 @@
 from vpython import *
 from time import sleep
-import pandas as pd
 
 from __init__ import *
 from slinky import Slinky
