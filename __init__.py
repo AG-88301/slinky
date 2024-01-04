@@ -8,8 +8,8 @@ g = 9.81                                # Gravity
 r = 1.293                               # Density of air
 
 # Slinky Functions
-f = lambda x: (
-    (m * g)/(2 * k)) * (1 - (x-1)**2
+L = lambda x: (
+    -(m * g)/(2 * k)) * (1 - (x-1)**2
 )                                       # Returns length of hanging slinky
 
 # Environoment Constants
