@@ -24,7 +24,7 @@ scene.camera.follow(slinky.balls[32])
 
 # Set slinky to correct position
 for i in range(slinky.turns + 1):
-    slinky.balls[i].pos = vector(0, L((1/slinky.turns) * i), 0)
+    slinky.balls[i].pos = vector(0, L(i/slinky.turns), 0)
 slinky.update()
 
 sleep(3)
@@ -36,8 +36,7 @@ while t < 10:
     rate(1000)
 
     # Force and Velocity applying on (moving section) of slinky
-    F = g * (((slinky.turns - moving)/slinky.turns) * m) - (k * L(moving/slinky.turns))
-    vel += (F/((moving/slinky.turns) * m)) * dt
+    vel += g * ((1/(moving/slinky.turns)) - (0.5*(moving/slinky.turns))) * dt
     
     # update position
     for i in range(moving):
@@ -49,8 +48,10 @@ while t < 10:
         slinky.balls[moving].pos.y = slinky.balls[moving-1].pos.y - L1/slinky.turns
         
         moving += 1
+        if moving in (16, 33, 48, 66): print(moving, t)
         vel = (vel * moving * (m/slinky.turns)) / ((moving + 1) * (m/slinky.turns))
-        if moving >= slinky.turns: break
+        if moving >= slinky.turns: 
+            break
 
 
     # update height map
@@ -65,6 +66,7 @@ while t < 10:
     f5.plot(t, slinky.balls[-1].pos.y)
 
     t += dt
+    t = round(t, 3)
     
 # t_c <= t -> slinky has collapsed
 while True:
@@ -85,6 +87,7 @@ while True:
     f5.plot(t, slinky.balls[-1].pos.y)
 
     t += dt
+    t = round(t, 3)
 
 
 while t <= 0.43:
